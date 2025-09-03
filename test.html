@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .navbar { margin-bottom: 20px; }
+        .navbar-link { 
+            padding: 10px 20px; 
+            margin: 0 5px; 
+            cursor: pointer; 
+            border: 1px solid #ccc; 
+            background: #f0f0f0; 
+        }
+        .navbar-link.active { 
+            background: #007bff; 
+            color: white; 
+        }
+        article { 
+            display: none; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            margin: 10px 0; 
+        }
+        article.active { 
+            display: block; 
+        }
+        .debug { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border: 1px solid #dee2e6; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Navigation Test</h1>
+    
+    <div class="debug">
+        <h3>Debug Info:</h3>
+        <div id="debug-info"></div>
+    </div>
+
+    <nav class="navbar">
+        <button class="navbar-link active" data-nav-link>About</button>
+        <button class="navbar-link" data-nav-link>Resume</button>
+        <button class="navbar-link" data-nav-link>Portfolio</button>
+        <button class="navbar-link" data-nav-link>Blog</button>
+        <button class="navbar-link" data-nav-link>Contact</button>
+    </nav>
+
+    <article class="about active" data-page="about">
+        <h2>About Page</h2>
+        <p>This is the about page content.</p>
+    </article>
+
+    <article class="resume" data-page="resume">
+        <h2>Resume Page</h2>
+        <p>This is the resume page content.</p>
+    </article>
+
+    <article class="portfolio" data-page="portfolio">
+        <h2>Portfolio Page</h2>
+        <p>This is the portfolio page content.</p>
+    </article>
+
+    <article class="blog" data-page="blog">
+        <h2>Blog Page</h2>
+        <p>This is the blog page content.</p>
+    </article>
+
+    <article class="contact" data-page="contact">
+        <h2>Contact Page</h2>
+        <p>This is the contact page content.</p>
+    </article>
+
+    <script>
+        // Debug function
+        function updateDebugInfo() {
+            const debugInfo = document.getElementById('debug-info');
+            const activePage = document.querySelector('article.active');
+            const activeNav = document.querySelector('.navbar-link.active');
+            
+            debugInfo.innerHTML = `
+                <p><strong>Active Page:</strong> ${activePage ? activePage.dataset.page : 'None'}</p>
+                <p><strong>Active Nav:</strong> ${activeNav ? activeNav.textContent : 'None'}</p>
+                <p><strong>Total Pages:</strong> ${document.querySelectorAll('[data-page]').length}</p>
+                <p><strong>Total Nav Links:</strong> ${document.querySelectorAll('[data-nav-link]').length}</p>
+            `;
+        }
+
+        // Page navigation variables
+        const navigationLinks = document.querySelectorAll("[data-nav-link]");
+        const pages = document.querySelectorAll("[data-page]");
+
+        console.log('Navigation links found:', navigationLinks.length);
+        console.log('Pages found:', pages.length);
+
+        // Add event to all nav link
+        for (let i = 0; i < navigationLinks.length; i++) {
+            navigationLinks[i].addEventListener("click", function () {
+                console.log('Nav link clicked:', this.textContent);
+                console.log('Looking for page:', this.textContent.toLowerCase());
+
+                for (let j = 0; j < pages.length; j++) {
+                    console.log('Checking page:', pages[j].dataset.page);
+                    
+                    if (this.textContent.toLowerCase() === pages[j].dataset.page) {
+                        console.log('Match found! Activating page:', pages[j].dataset.page);
+                        
+                        // Remove active class from all pages and nav links
+                        pages.forEach(page => page.classList.remove('active'));
+                        navigationLinks.forEach(link => link.classList.remove('active'));
+                        
+                        // Add active class to current page and nav link
+                        pages[j].classList.add("active");
+                        this.classList.add("active");
+                        
+                        window.scrollTo(0, 0);
+                        updateDebugInfo();
+                        return;
+                    }
+                }
+                
+                console.log('No matching page found for:', this.textContent);
+            });
+        }
+
+        // Initial debug info
+        updateDebugInfo();
+    </script>
+</body>
+</html>
