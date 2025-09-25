@@ -1880,3 +1880,39 @@ textarea.form-input::-webkit-resizer { display: none; }
   .timeline-text { max-width: 700px; }
 
 }
+
+
+.about-text { line-height: 1.75; }
+
+/* 求职条/徽章 */
+.availability {
+  margin: 0.75rem 0 0.5rem;
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+}
+.pill {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+}
+.pill--primary {
+  font-weight: 600;
+  border-color: rgba(255,215,0,0.35);
+  background: rgba(255,215,0,0.12);
+}
+
+/* 小标题 */
+.sec-title { margin: 1rem 0 0.4rem; font-weight: 600; }
+
+/* 技能两列网格（左：标签，右：内容） */
+.skills-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 0.75rem;
+  row-gap: 0.35rem;
+  margin: 0 0 1rem 0;
+}
+.skills-grid > div { display: contents; } /* 让 dt/dd 成为网格单元 */
+.skills-grid dt { font-weight: 600; }
+.skills-grid dd { margin: 0; opacity: 0.9; }
