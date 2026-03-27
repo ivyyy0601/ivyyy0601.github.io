@@ -155,7 +155,7 @@ input, textarea {
 
 html { font-family: var(--ff-poppins); }
 
-body { background: var(--smoky-black); }
+body { background: var(--smoky-black); color: var(--white-2); }
 
 
 
@@ -495,16 +495,55 @@ main {
   #ABOUT
 \*-----------------------------------*/
 
-.about .article-title { margin-bottom: 15px; }
+.about { padding: 24px; }
+
+.about .article-title { margin-bottom: 20px; }
 
 .about-text {
   color: var(--light-gray);
-  font-size: var(--fs-6);
+  font-size: var(--fs-5);
   font-weight: var(--fw-300);
-  line-height: 1.6;
+  line-height: 2.0;
 }
 
-.about-text p { margin-bottom: 15px; }
+/* First paragraph — bigger, brighter, acts as a headline */
+.about-text p:first-child {
+  font-size: var(--fs-4);
+  line-height: 1.8;
+  color: var(--white-1);
+  font-weight: var(--fw-400);
+  margin-bottom: 28px;
+  padding-left: 16px;
+  border-left: 3px solid var(--orange-yellow-crayola);
+}
+
+.about-text p {
+  margin-bottom: 24px;
+  letter-spacing: 0.015em;
+}
+
+.about-text strong {
+  font-weight: var(--fw-600);
+  color: var(--white-2);
+}
+
+.about-text em {
+  font-style: normal;
+  color: var(--orange-yellow-crayola);
+  font-weight: var(--fw-500);
+}
+
+/* Skills in about — more breathing room */
+.about article .skills-item,
+.skill .skills-item { padding: 6px 0; }
+
+.skill .skills-list.content-card { padding: 24px; }
+
+.skill .skills-item:not(:last-child) {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--jet);
+}
 
 
 
@@ -824,7 +863,7 @@ main {
 }
 
 .timeline-text {
-  color: var(--light-gray);
+  color: var(--white-1);
   font-weight: var(--fw-300);
   line-height: 1.6;
 }
@@ -1339,7 +1378,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .avatar-box { border-radius: 30px; }
 
-  .avatar-box img { width: 120px; }
+  .avatar-box img { width: 200px; }
 
   .info-content .name { margin-bottom: 15px; }
 
@@ -1385,7 +1424,9 @@ textarea.form-input::-webkit-resizer { display: none; }
    * #ABOUT
    */
 
-  .about .article-title { margin-bottom: 20px; }
+  .about { padding: 36px; }
+
+  .about .article-title { margin-bottom: 25px; }
 
   .about-text { margin-bottom: 40px; }
 
@@ -1835,7 +1876,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar-info { flex-direction: column; }
 
-  .avatar-box img { width: 150px; }
+  .avatar-box img { width: 230px; }
 
   .info-content .name {
     white-space: nowrap;
@@ -1881,38 +1922,3 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 }
 
-
-.about-text { line-height: 1.75; }
-
-/* 求职条/徽章 */
-.availability {
-  margin: 0.75rem 0 0.5rem;
-  display: flex; flex-wrap: wrap; gap: 0.5rem;
-}
-.pill {
-  font-size: 0.85rem;
-  padding: 0.35rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.06);
-}
-.pill--primary {
-  font-weight: 600;
-  border-color: rgba(255,215,0,0.35);
-  background: rgba(255,215,0,0.12);
-}
-
-/* 小标题 */
-.sec-title { margin: 1rem 0 0.4rem; font-weight: 600; }
-
-/* 技能两列网格（左：标签，右：内容） */
-.skills-grid {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: 0.75rem;
-  row-gap: 0.35rem;
-  margin: 0 0 1rem 0;
-}
-.skills-grid > div { display: contents; } /* 让 dt/dd 成为网格单元 */
-.skills-grid dt { font-weight: 600; }
-.skills-grid dd { margin: 0; opacity: 0.9; }
