@@ -3,439 +3,706 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ivy Chen</title>
-  <meta name="description" content="Ivy (Jiexin) Chen: Statistics M.A. at Columbia. Backend, LLM agents and quant research systems.">
+  <meta name="description" content="Ivy (Jiexin) Chen — M.A. Statistics (Advanced ML) at Columbia. Backend, data and LLM systems engineer.">
+
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-  <style>
-    :root {
-      --bg: #fbfaf8;
-      --surface: #ffffff;
-      --text: #1d1d1f;
-      --muted: #6b6b70;
-      --faint: #9a9aa0;
-      --line: #e8e6e1;
-      --accent: #b4532a;
-      --accent-soft: #f6e9e2;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #111113;
-        --surface: #18181b;
-        --text: #ededef;
-        --muted: #a1a1a8;
-        --faint: #6e6e76;
-        --line: #26262b;
-        --accent: #e8915f;
-        --accent-soft: #2a1e18;
-      }
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font: 400 15px/1.65 "Inter", system-ui, -apple-system, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
-
-    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
-
-    /* nav */
-    .nav {
-      position: sticky; top: 0; z-index: 10;
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-    .nav-name { font-weight: 600; }
-    .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
-    .nav-links a:hover { color: var(--text); }
-
-    /* hero */
-    .hero { padding: 72px 0 56px; }
-    .avatar {
-      width: 88px; height: 88px; border-radius: 50%;
-      object-fit: cover; display: block; margin-bottom: 28px;
-      border: 1px solid var(--line);
-    }
-    h1 {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-weight: 400;
-      font-size: clamp(40px, 7vw, 56px);
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-    }
-    .tagline { margin-top: 10px; font-size: 18px; color: var(--muted); }
-    .bio { margin-top: 22px; max-width: 600px; color: var(--muted); }
-    .bio strong { color: var(--text); font-weight: 500; }
-    .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 8px 14px; border-radius: 999px;
-      border: 1px solid var(--line); background: var(--surface);
-      font-size: 14px; font-weight: 500;
-      transition: border-color .15s, color .15s;
-    }
-    .btn:hover { border-color: var(--accent); color: var(--accent); }
-    .btn svg { width: 16px; height: 16px; }
-
-    /* sections */
-    section { padding: 48px 0; border-top: 1px solid var(--line); scroll-margin-top: 56px; }
-    h2 {
-      font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--faint); margin-bottom: 28px;
-    }
-
-    /* timeline rows */
-    .row { display: grid; grid-template-columns: 130px 1fr; gap: 4px 24px; padding: 14px 0; }
-    .row + .row { border-top: 1px dashed var(--line); }
-    .when { color: var(--faint); font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 1px; }
-    .what h3 { font-size: 15px; font-weight: 600; }
-    .what h3 .org { font-weight: 400; color: var(--muted); }
-    .what p { color: var(--muted); font-size: 14px; margin-top: 2px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-    .chip {
-      font-size: 12.5px; padding: 2px 10px; border-radius: 999px;
-      background: var(--accent-soft); color: var(--accent);
-    }
-    a.chip:hover { text-decoration: underline; }
-
-    /* projects */
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .card {
-      display: flex; flex-direction: column;
-      padding: 18px; border-radius: 14px;
-      background: var(--surface); border: 1px solid var(--line);
-      transition: border-color .15s, transform .15s;
-    }
-    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card h3 { font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; gap: 8px; }
-    .card h3 .arrow { color: var(--faint); transition: color .15s; }
-    .card:hover h3 .arrow { color: var(--accent); }
-    .card p { color: var(--muted); font-size: 14px; margin-top: 6px; flex: 1; }
-    .card .tags { margin-top: 12px; font-size: 12.5px; color: var(--faint); }
-
-    .sub { margin: 36px 0 14px; font-size: 14px; font-weight: 600; }
-    .demo-list { display: flex; flex-wrap: wrap; gap: 8px; }
-
-    .thumb {
-      aspect-ratio: 16 / 10; margin: -18px -18px 16px;
-      border-bottom: 1px solid var(--line); border-radius: 13px 13px 0 0;
-      overflow: hidden; background: #fff;
-    }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .3s; }
-    .card:hover .thumb img { transform: scale(1.03); }
-    .thumb--text {
-      display: grid; place-items: center;
-      background: var(--accent-soft); color: var(--accent);
-      font-family: "Instrument Serif", Georgia, serif; font-size: 26px;
-    }
-    .grid--small { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
-    .card--small { padding: 14px; }
-    .card--small .thumb { margin: -14px -14px 12px; }
-    .card--small h3 { font-size: 14px; }
-    .card--small .tags { margin-top: 4px; }
-
-    details { margin-top: 36px; }
-    summary {
-      cursor: pointer; font-size: 14px; font-weight: 600; color: var(--muted);
-      list-style: none; display: inline-flex; align-items: center; gap: 6px;
-    }
-    summary::-webkit-details-marker { display: none; }
-    summary::before { content: "+"; display: inline-block; width: 14px; color: var(--accent); }
-    details[open] summary::before { content: "−"; }
-
-    /* skills */
-    .skills .what { color: var(--muted); font-size: 14px; }
-
-    footer { padding: 40px 0 56px; border-top: 1px solid var(--line); color: var(--faint); font-size: 13px; }
-
-    @media (max-width: 600px) {
-      .nav-links { gap: 16px; }
-      .hero { padding: 48px 0 40px; }
-      .row { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      .grid--small { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
 </head>
 
 <body>
 
-  <nav class="nav">
-    <div class="wrap">
-      <a href="#" class="nav-name">Ivy Chen</a>
-      <div class="nav-links">
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#about">Education</a>
-      </div>
-    </div>
-  </nav>
+  <main>
 
-  <main class="wrap">
+    <!--
+      - #SIDEBAR
+    -->
 
-    <!-- hero -->
-    <header class="hero">
-      <img class="avatar" src="./assets/images/my-avatar.png" alt="Ivy Chen">
-      <h1>Jiexin (Ivy) Chen</h1>
-      <p class="tagline">Backend · LLM Agents · Quant Systems</p>
-      <p class="bio">
-        M.A. in Statistics (Advanced ML) at <strong>Columbia University</strong>.
-        I build systems where engineering meets data, from trading backends and
-        multi-agent LLM tools to market research platforms.
-      </p>
-      <div class="links">
-        <a class="btn" href="mailto:jc6630@columbia.edu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          Email
-        </a>
-        <a class="btn" href="https://github.com/ivyyy0601" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
-          GitHub
-        </a>
-        <a class="btn" href="https://www.linkedin.com/in/jiexin-chen-ivy/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </header>
+    <aside class="sidebar" data-sidebar>
 
+      <div class="sidebar-info">
 
-    <!-- experience -->
-    <section id="experience">
-      <h2>Experience</h2>
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Ivy Chen" width="80">
+        </figure>
 
-      <div class="row">
-        <div class="when">2026</div>
-        <div class="what">
-          <h3>Software Engineer Intern <span class="org">· Bybit</span></h3>
-          <p>Backend team for the P2P trading platform. Java, gRPC, Kafka, Redis, MySQL.</p>
+        <div class="info-content">
+          <h1 class="name" title="Jiexin (Ivy) Chen">JIEXIN (IVY) CHEN</h1>
+
+          <p class="title">Backend · Data · LLM Systems</p>
         </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
       </div>
 
-      <div class="row">
-        <div class="when">2026</div>
-        <div class="what">
-          <h3>AI Engineer Intern <span class="org">· Antalpha</span></h3>
-          <p>Multi-agent systems and harness engineering for AI employees.</p>
-        </div>
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:jc6630@columbia.edu" class="contact-link">jc6630@columbia.edu</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+              <a href="tel:+19293348663" class="contact-link">+1 (929) 334-8663</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="school-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Education</p>
+              <p class="contact-link">Columbia University · M.A. Statistics</p>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>New York, NY</address>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/jiexin-chen-ivy/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/ivyyy0601" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="mailto:jc6630@columbia.edu" class="social-link" aria-label="Email">
+              <ion-icon name="mail-outline"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
       </div>
 
-      <div class="row">
-        <div class="when">2025 – 2026</div>
-        <div class="what">
-          <h3>Quantitative Systems Engineer Intern <span class="org">· RAYS Capital Partners</span></h3>
-          <p>AI-driven multi-agent stock research platform, market dashboards and alternative data.</p>
-          <div class="chips">
-            <a class="chip" href="http://178.156.166.167/overall" target="_blank" rel="noopener">Terminal ↗</a>
-            <a class="chip" href="http://91.98.37.33/dashboard/" target="_blank" rel="noopener">Indices ↗</a>
-            <a class="chip" href="http://91.98.37.33/etf/" target="_blank" rel="noopener">ETFs ↗</a>
-            <a class="chip" href="http://91.98.37.33/sentiment/" target="_blank" rel="noopener">Sentiment ↗</a>
+    </aside>
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>About</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Resume</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li>
+        </ul>
+      </nav>
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            Hi, I’m <strong>Ivy (Jiexin) Chen</strong>, an <strong>M.A. student in Statistics (Advanced ML) at Columbia University</strong>.
+            I studied Computer Science at Hong Kong Baptist University and AI &amp; ML on exchange at the <strong>University of Oxford</strong>.
+          </p>
+
+          <p>
+            I build systems where engineering meets data: backend services, LLM agents, quant research tools and data pipelines.
+            I’ve interned at <strong>Bybit</strong>, <strong>Antalpha</strong>, <strong>RAYS Capital</strong>, <strong>Wisers</strong> and <strong>StudyCo</strong>,
+            and done research at <strong>Columbia University Irving Medical Center</strong>.
+          </p>
+
+          <div class="availability">
+            <span class="pill pill--primary">Open to Full-time Roles</span>
+            <span class="pill">Backend / SWE</span>
+            <span class="pill">Data Engineering</span>
+            <span class="pill">ML / LLM Engineering</span>
+            <span class="pill">Quant Developer</span>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="when">2025 – 2026</div>
-        <div class="what">
-          <h3>Research Assistant <span class="org">· Columbia University Irving Medical Center</span></h3>
-          <p>ICU data pipelines on the MIMIC database with BigQuery.</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="when">2023 – 2025</div>
-        <div class="what">
-          <h3>Data Science Intern <span class="org">· StudyCo</span></h3>
-          <p>ETL, user analytics and A/B testing for social growth.</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="when">2023</div>
-        <div class="what">
-          <h3>Data Analytics Engineer Intern <span class="org">· Wisers Information</span></h3>
-          <p>Big-data warehouse and ETL with Hadoop, Spark, Hive and SQL.</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="when">2022</div>
-        <div class="what">
-          <h3>Research Intern <span class="org">· Guosen Securities</span></h3>
-        </div>
-      </div>
-    </section>
+        </section>
 
 
-    <!-- projects -->
-    <section id="projects">
-      <h2>Projects</h2>
+        <!-- what I do -->
+        <section class="service">
 
-      <div class="grid">
-        <a class="card" href="https://github.com/ivyyy0601/A-Multi-Agent-Platform-for-Stock-Research-Sentiment-Analysis-and-Forecasting" target="_blank" rel="noopener">
-          <div class="thumb"><img src="./assets/images/project-trader.png" alt="Multi-Agent Stock Research Platform" loading="lazy"></div>
-          <h3>Multi-Agent Stock Research Platform <span class="arrow">↗</span></h3>
-          <p>News sentiment forecasting and a multi-agent investment desk where analyst, bull/bear and PM agents debate.</p>
-          <div class="tags">FastAPI · React · FinBERT · XGBoost · Claude</div>
-        </a>
+          <h3 class="h3 service-title">What I work on</h3>
 
-        <a class="card" href="https://github.com/DeclanNelson178/stat5293-project" target="_blank" rel="noopener">
-          <div class="thumb thumb--text"><span>spec → agents → tested API</span></div>
-          <h3>Multi-Agent Backend Code Generation <span class="arrow">↗</span></h3>
-          <p>Turns natural-language specs into tested REST services. Model routing cut cost 75%.</p>
-          <div class="tags">Python · RAG · Claude · Gemini</div>
-        </a>
+          <ul class="service-list">
 
-        <a class="card" href="https://github.com/ivyyy0601/smart-audit-registry" target="_blank" rel="noopener">
-          <div class="thumb"><img src="./assets/images/project-blockchain.png" alt="Smart contract audit system" loading="lazy"></div>
-          <h3>LLM Smart Contract Audit <span class="arrow">↗</span></h3>
-          <p>AST + LLM pipeline for Solidity vulnerability detection, with reports stored on IPFS.</p>
-          <div class="tags">Solidity · Tree-sitter · OpenAI · Sepolia</div>
-        </a>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="server-outline"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Backend &amp; Distributed Systems</h4>
+                <p class="service-item-text">
+                  Java microservices with Spring Boot, gRPC/Protobuf, Kafka event pipelines, Redis and MySQL in production.
+                </p>
+              </div>
+            </li>
 
-        <a class="card" href="http://178.156.166.167/overall" target="_blank" rel="noopener">
-          <div class="thumb"><img src="./assets/images/project-terminal.jpg" alt="Market terminal" loading="lazy"></div>
-          <h3>Bloomberg-style Market Terminal <span class="arrow">↗</span></h3>
-          <p>Screener, fundamentals, earnings calendar and news-annotated charts with an AI sidebar.</p>
-          <div class="tags">React · Live demo</div>
-        </a>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="sparkles-outline"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">LLM &amp; Agent Systems</h4>
+                <p class="service-item-text">
+                  Multi-agent workflows, RAG, tool calling and MCP with Claude, Gemini and OpenAI models.
+                </p>
+              </div>
+            </li>
 
-        <a class="card" href="https://github.com/ivyyy0601" target="_blank" rel="noopener">
-          <div class="thumb"><img src="./assets/images/project-n8n.png" alt="n8n workflows" loading="lazy"></div>
-          <h3>n8n Crypto Automation <span class="arrow">↗</span></h3>
-          <p>A collection of LLM-powered automation workflows for crypto research and alerts.</p>
-          <div class="tags">n8n · OpenAI · LangChain · Solana / Ethereum</div>
-        </a>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="trending-up-outline"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Quantitative Research Tools</h4>
+                <p class="service-item-text">
+                  Market dashboards, sentiment signals and forecasting models (XGBoost, time series) for US equities and ETFs.
+                </p>
+              </div>
+            </li>
 
-        <a class="card" href="https://github.com/ivyyy0601/kafka-stock-market-pipeline-aws" target="_blank" rel="noopener">
-          <div class="thumb"><img src="./assets/images/project-kafka.jpg" alt="Kafka pipeline" loading="lazy"></div>
-          <h3>Kafka Stock Market Pipeline <span class="arrow">↗</span></h3>
-          <p>Real-time market data streaming into a queryable data lake on AWS.</p>
-          <div class="tags">Kafka · EC2 · S3 · Glue · Athena</div>
-        </a>
-      </div>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="layers-outline"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Data Engineering &amp; Analytics</h4>
+                <p class="service-item-text">
+                  Spark, Hive and Airflow pipelines, warehouse modeling, BigQuery, and A/B testing for business decisions.
+                </p>
+              </div>
+            </li>
 
-      <p class="sub">Live demos</p>
-      <div class="demo-list">
-        <a class="btn" href="http://178.156.166.167/detail?symbol=AAPL" target="_blank" rel="noopener">News Sentiment Forecast ↗</a>
-        <a class="btn" href="http://178.156.166.167/team" target="_blank" rel="noopener">Multi-Agent Desk ↗</a>
-        <a class="btn" href="http://91.98.37.33/dashboard/" target="_blank" rel="noopener">Global Indices ↗</a>
-        <a class="btn" href="http://91.98.37.33/etf/" target="_blank" rel="noopener">ETF Monitor ↗</a>
-        <a class="btn" href="http://91.98.37.33/sentiment/" target="_blank" rel="noopener">Social Sentiment ↗</a>
-      </div>
+          </ul>
 
-      <details>
-        <summary>More projects (10)</summary>
-        <div class="grid grid--small more">
-          <a class="card card--small" href="https://github.com/ivyyy0601/MLOps-Pipeline-" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-MLOps-Pipeline.png" alt="" loading="lazy"></div>
-            <h3>YouTube Sentiment · MLOps</h3>
-            <div class="tags">MLflow · DVC · Docker</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/Book-Recommender" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-Book-Recommender.jpg" alt="" loading="lazy"></div>
-            <h3>Semantic Book Recommender</h3>
-            <div class="tags">LangChain · ChromaDB</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/Uber-Data-Engineering-GCP" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-uber.jpg" alt="" loading="lazy"></div>
-            <h3>Uber Data Analytics on GCP</h3>
-            <div class="tags">BigQuery · Mage</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/Sentiment-Analysis" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-twitter-bert.jpg" alt="" loading="lazy"></div>
-            <h3>Twitter Sentiment · BERT</h3>
-            <div class="tags">NLP</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/Prediction-of-Intern-Recruitment-Using-Bayesian-Network" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-bayes.jpg" alt="" loading="lazy"></div>
-            <h3>Intern Recruitment · Bayesian Network</h3>
-            <div class="tags">Probabilistic models</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/Character-Relationship-Analysis" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-t5-pagerank.jpg" alt="" loading="lazy"></div>
-            <h3>Long-text Summary &amp; Character Graph</h3>
-            <div class="tags">T5 · PageRank</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/Reinforcement-Learning" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-rl-maze.jpg" alt="" loading="lazy"></div>
-            <h3>Path Planning with RL</h3>
-            <div class="tags">Q-learning · DQN</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/LLM-Support-for-Homework-Assignments" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-llmcheck.jpg" alt="" loading="lazy"></div>
-            <h3>LLM Check System</h3>
-            <div class="tags">Flask · MySQL</div>
-          </a>
-          <a class="card card--small" href="https://github.com/ivyyy0601/Online-Restaurant-Ordering-System" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-restaurant.jpg" alt="" loading="lazy"></div>
-            <h3>Online Restaurant Ordering</h3>
-            <div class="tags">PHP · MySQL</div>
-          </a>
-          <a class="card card--small" href="https://youtube.com/@ivyyy0601?si=kjonzxIB0Tf8V" target="_blank" rel="noopener">
-            <div class="thumb"><img src="./assets/images/project-montecarlo.jpg" alt="" loading="lazy"></div>
-            <h3>Economic Scenario Generator</h3>
-            <div class="tags">Monte Carlo simulation</div>
-          </a>
-        </div>
-      </details>
-    </section>
+        </section>
 
 
-    <!-- education -->
-    <section id="about">
-      <h2>Education</h2>
+        <section class="content-card chatbot-card" aria-label="Ask Ivy (AI)">
+          <h3 class="h3" style="display:flex;align-items:center;gap:10px;">
+            <img src="./assets/images/avatar-2.png" alt="" width="28" height="28" style="border-radius:50%;">
+            Ask Ivy
+          </h3>
 
-      <div class="row">
-        <div class="when">2025 – 2026</div>
-        <div class="what">
-          <h3>Columbia University</h3>
-          <p>M.A. in Statistics, Advanced Machine Learning Track</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="when">2021 – 2025</div>
-        <div class="what">
-          <h3>Hong Kong Baptist University</h3>
-          <p>B.Sc. (Honours) in Computer Science · Top 4%</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="when">2023</div>
-        <div class="what">
-          <h3>University of Oxford</h3>
-          <p>Exchange in AI &amp; Machine Learning</p>
-        </div>
-      </div>
-    </section>
+          <iframe
+            src="https://ivyyy0601-chatbot.hf.space?__theme=dark"
+            title="Ask Ivy chatbot"
+            frameborder="0"
+            width="100%"
+            height="520"
+            style="border-radius:16px; margin-top:12px;"
+            allow="clipboard-read; clipboard-write; microphone;">
+          </iframe>
 
-    <!-- skills -->
-    <section class="skills">
-      <h2>Skills</h2>
-      <div class="row"><div class="when">Languages</div><div class="what">Python, Java, C++, SQL, R, JavaScript</div></div>
-      <div class="row"><div class="when">Backend</div><div class="what">Spring Boot, gRPC, Kafka, Redis, MySQL</div></div>
-      <div class="row"><div class="when">Data</div><div class="what">Spark, Hive, Airflow, BigQuery, Snowflake, AWS, GCP</div></div>
-      <div class="row"><div class="when">ML &amp; LLM</div><div class="what">PyTorch, scikit-learn, XGBoost, RAG, multi-agent systems, MCP</div></div>
-    </section>
+          <p class="timeline-text" style="margin-top:12px;">
+            💡 Tip: Ask me about my background, skills, projects, or anything else!
+          </p>
+        </section>
+
+      </article>
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <!-- ===== Experience ===== -->
+        <section class="timeline">
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </div>
+            <h3 class="h3">Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Software Engineer Intern — Bybit
+                <a class="inline-link" href="https://www.bybit.com/en/p2p/buy/USDT/USD" target="_blank" rel="noopener">P2P ↗</a>
+              </h4>
+              <span>Jun 2026 — Sep 2026 · Hong Kong</span>
+              <p class="timeline-text">Backend team, P2P trading platform. Java, gRPC, Kafka, Redis, MySQL.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">AI Engineer Intern — Antalpha</h4>
+              <span>May 2026 — Jun 2026 · Hong Kong</span>
+              <p class="timeline-text">Multi-agent systems and harness engineering for AI employees.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Quantitative Systems Engineer Intern — RAYS Capital Partners</h4>
+              <span>Dec 2025 — May 2026 · Hong Kong · Remote</span>
+              <p class="timeline-text">AI-driven multi-agent stock research platform: news sentiment forecasting, market dashboards and alternative data. <a class="inline-link" href="http://178.156.166.167/overall" target="_blank" rel="noopener">Terminal ↗</a> <a class="inline-link" href="http://91.98.37.33/dashboard/" target="_blank" rel="noopener">Indices ↗</a> <a class="inline-link" href="http://91.98.37.33/etf/" target="_blank" rel="noopener">ETFs ↗</a> <a class="inline-link" href="http://91.98.37.33/sentiment/" target="_blank" rel="noopener">Sentiment ↗</a></p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Research Assistant — Columbia University Irving Medical Center</h4>
+              <span>Nov 2025 — May 2026 · New York</span>
+              <p class="timeline-text">ICU data pipelines on the MIMIC database with BigQuery.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Data Science Intern — AAET | StudyCo</h4>
+              <span>2023 — 2025 · Melbourne · Hybrid</span>
+              <p class="timeline-text">ETL, user analytics and A/B testing for social growth.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Data Analytics Engineer Intern — Wisers Information</h4>
+              <span>May 2023 — Jul 2023</span>
+              <p class="timeline-text">Big-data warehouse and ETL with Hadoop, Spark, Hive and SQL.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Research Intern — Guosen Securities</h4>
+              <span>Jul 2022 — Aug 2022</span>
+            </li>
+
+          </ol>
+        </section>
+
+
+        <!-- ===== Education ===== -->
+        <section class="timeline">
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Columbia University</h4>
+              <span>2025 — Dec 2026 (expected) · New York, NY</span>
+              <div class="timeline-text">
+                <ul>
+                  <li><b>M.A. in Statistics</b>, Advanced Machine Learning Track</li>
+                  <li>Columbia Data Science Society · Blockchain@Columbia</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Hong Kong Baptist University</h4>
+              <span>2021 — Jun 2025 · Hong Kong</span>
+              <div class="timeline-text">
+                <ul>
+                  <li><b>B.Sc. (Honours) in Computer Science and Technology</b> · Class rank: top 4%</li>
+                  <li>Honorable Mention, Mathematical Contest in Modeling (MCM), 2024</li>
+                  <li>Provincial 2nd Prize, Chinese Mathematical Competition, 2023</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">University of Oxford</h4>
+              <span>2023 · Oxford, UK</span>
+              <div class="timeline-text">
+                <ul>
+                  <li>Exchange Program in Artificial Intelligence and Machine Learning</li>
+                </ul>
+              </div>
+            </li>
+
+          </ol>
+        </section>
+
+
+        <!-- ===== Skills ===== -->
+        <section class="skill">
+          <h3 class="h3 skills-title">Technical Skills</h3>
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+              <h5 class="h5">Languages</h5>
+              <div class="tag-list">
+                <span class="tag">Python</span><span class="tag">Java</span><span class="tag">C++</span><span class="tag">C</span>
+                <span class="tag">SQL</span><span class="tag">R</span><span class="tag">JavaScript</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <h5 class="h5">Backend &amp; Distributed Systems</h5>
+              <div class="tag-list">
+                <span class="tag">Spring Boot</span><span class="tag">gRPC</span><span class="tag">Protobuf</span><span class="tag">Kafka</span>
+                <span class="tag">Redis</span><span class="tag">MySQL</span><span class="tag">MyBatis-Plus</span><span class="tag">REST APIs</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <h5 class="h5">Data &amp; Cloud</h5>
+              <div class="tag-list">
+                <span class="tag">Spark</span><span class="tag">Hadoop</span><span class="tag">Hive</span><span class="tag">Airflow</span>
+                <span class="tag">Flink</span><span class="tag">BigQuery</span><span class="tag">Snowflake</span><span class="tag">AWS</span>
+                <span class="tag">GCP</span><span class="tag">Linux</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <h5 class="h5">Quantitative &amp; ML</h5>
+              <div class="tag-list">
+                <span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">scikit-learn</span><span class="tag">PyTorch</span>
+                <span class="tag">statsmodels</span><span class="tag">SciPy</span><span class="tag">XGBoost</span><span class="tag">Time Series</span>
+                <span class="tag">NLP</span><span class="tag">A/B Testing</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <h5 class="h5">LLM Systems</h5>
+              <div class="tag-list">
+                <span class="tag">RAG</span><span class="tag">Multi-agent Systems</span><span class="tag">Tool Calling</span><span class="tag">MCP</span>
+                <span class="tag">Claude API</span><span class="tag">Gemini API</span><span class="tag">OpenAI API</span>
+              </div>
+            </li>
+
+          </ul>
+        </section>
+
+      </article>
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <!-- filter values must match data-category (lowercased) -->
+          <ul class="filter-list">
+            <li class="filter-item"><button class="active" data-filter-btn>All</button></li>
+            <li class="filter-item"><button data-filter-btn>LLM &amp; Agents</button></li>
+            <li class="filter-item"><button data-filter-btn>Quant</button></li>
+            <li class="filter-item"><button data-filter-btn>Data Engineering</button></li>
+            <li class="filter-item"><button data-filter-btn>Machine Learning</button></li>
+          </ul>
+
+          <div class="filter-select-box">
+            <button class="filter-select" data-select>
+              <div class="select-value" data-selecct-value>Select category</div>
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="select-list">
+              <li class="select-item"><button data-select-item>All</button></li>
+              <li class="select-item"><button data-select-item>LLM &amp; Agents</button></li>
+              <li class="select-item"><button data-select-item>Quant</button></li>
+              <li class="select-item"><button data-select-item>Data Engineering</button></li>
+              <li class="select-item"><button data-select-item>Machine Learning</button></li>
+            </ul>
+          </div>
+
+          <ul class="project-list">
+
+            <!-- ---------- LLM & Agents ---------- -->
+            <li class="project-item active" data-filter-item data-category="llm &amp; agents">
+              <a href="https://github.com/DeclanNelson178/stat5293-project" target="_blank" rel="noopener">
+                <figure class="project-img project-img--gen gen-violet">
+                  <ion-icon name="git-network-outline"></ion-icon>
+                  <span class="project-badge">GitHub</span>
+                </figure>
+                <h3 class="project-title">Multi-Agent Backend Code Generation</h3>
+                <p class="project-category">DAG agents · RAG · Claude &amp; Gemini · 75% cheaper, 100% hidden-test pass</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="llm &amp; agents">
+              <a href="https://github.com/ivyyy0601/smart-audit-registry" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-blockchain.png" alt="LLM Smart Contract Audit System" loading="lazy">
+                </figure>
+                <h3 class="project-title">LLM Smart Contract Audit System</h3>
+                <p class="project-category">Solidity · Tree-sitter AST · OpenAI · IPFS · Sepolia</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="llm &amp; agents">
+              <a href="http://178.156.166.167/team" target="_blank" rel="noopener">
+                <figure class="project-img project-img--gen gen-rose">
+                  <ion-icon name="people-outline"></ion-icon>
+                  <span class="project-badge">Live demo</span>
+                </figure>
+                <h3 class="project-title">Multi-Agent Investment Desk</h3>
+                <p class="project-category">Analyst · Bull/Bear · Trader · PM agents → PDF investment memo</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="llm &amp; agents">
+              <a href="https://github.com/ivyyy0601" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-n8n.png" alt="n8n Crypto Automation Workflow Collection" loading="lazy">
+                </figure>
+                <h3 class="project-title">n8n Crypto Automation Workflows</h3>
+                <p class="project-category">n8n · OpenAI · LangChain · Solana / Ethereum</p>
+              </a>
+            </li>
+
+            <!-- ---------- Quant ---------- -->
+            <li class="project-item active" data-filter-item data-category="quant">
+              <a href="https://github.com/ivyyy0601/A-Multi-Agent-Platform-for-Stock-Research-Sentiment-Analysis-and-Forecasting" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-trader.png" alt="AI Multi-Agent Stock Research Platform" loading="lazy">
+                </figure>
+                <h3 class="project-title">AI Multi-Agent Stock Research Platform</h3>
+                <p class="project-category">FastAPI · React · FinBERT · XGBoost · Claude API</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="quant">
+              <a href="http://178.156.166.167/overall" target="_blank" rel="noopener">
+                <figure class="project-img project-img--gen gen-amber">
+                  <ion-icon name="stats-chart-outline"></ion-icon>
+                  <span class="project-badge">Live demo</span>
+                </figure>
+                <h3 class="project-title">Bloomberg-style Market Terminal</h3>
+                <p class="project-category">React · screener · fundamentals · AI sidebar</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="quant">
+              <a href="http://178.156.166.167/detail?symbol=AAPL" target="_blank" rel="noopener">
+                <figure class="project-img project-img--gen gen-blue">
+                  <ion-icon name="newspaper-outline"></ion-icon>
+                  <span class="project-badge">Live demo</span>
+                </figure>
+                <h3 class="project-title">News Sentiment Stock Forecasting</h3>
+                <p class="project-category">276K articles · Claude Batch API · XGBoost · RAG similar days</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="quant">
+              <a href="http://91.98.37.33/dashboard/" target="_blank" rel="noopener">
+                <figure class="project-img project-img--gen gen-green">
+                  <ion-icon name="globe-outline"></ion-icon>
+                  <span class="project-badge">Live demo</span>
+                </figure>
+                <h3 class="project-title">Global Indices Monitor</h3>
+                <p class="project-category">12 global indices · volatility · RSI · daily AI market briefs</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="quant">
+              <a href="http://91.98.37.33/etf/" target="_blank" rel="noopener">
+                <figure class="project-img project-img--gen gen-teal">
+                  <ion-icon name="pie-chart-outline"></ion-icon>
+                  <span class="project-badge">Live demo</span>
+                </figure>
+                <h3 class="project-title">Thematic ETF Monitor</h3>
+                <p class="project-category">Thematic ETFs across 5 markets · volatility · RSI · turnover</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="quant">
+              <a href="http://91.98.37.33/sentiment/" target="_blank" rel="noopener">
+                <figure class="project-img project-img--gen gen-violet">
+                  <ion-icon name="chatbubbles-outline"></ion-icon>
+                  <span class="project-badge">Live demo</span>
+                </figure>
+                <h3 class="project-title">Social &amp; Polymarket Sentiment Tracker</h3>
+                <p class="project-category">Reddit · X · news · Polymarket · Node.js</p>
+              </a>
+            </li>
+
+            <!-- ---------- Data Engineering ---------- -->
+            <li class="project-item active" data-filter-item data-category="data engineering">
+              <a href="https://github.com/ivyyy0601/kafka-stock-market-pipeline-aws" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-kafka.jpg" alt="Kafka Stock Market Pipeline on AWS" loading="lazy">
+                </figure>
+                <h3 class="project-title">Kafka Stock Market Pipeline on AWS</h3>
+                <p class="project-category">Kafka · EC2 · S3 · Glue · Athena</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="data engineering">
+              <a href="https://github.com/ivyyy0601/Uber-Data-Engineering-GCP" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-uber.jpg" alt="Uber Data Engineering on GCP" loading="lazy">
+                </figure>
+                <h3 class="project-title">Uber Data Analytics on GCP</h3>
+                <p class="project-category">BigQuery · Mage · Python</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="data engineering">
+              <a href="https://github.com/ivyyy0601/LLM-Support-for-Homework-Assignments" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-llmcheck.jpg" alt="LLM Check System" loading="lazy">
+                </figure>
+                <h3 class="project-title">LLM Check System</h3>
+                <p class="project-category">Flask · MySQL · LLM grading support</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="data engineering">
+              <a href="https://github.com/ivyyy0601/Online-Restaurant-Ordering-System" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-restaurant.jpg" alt="Online Restaurant Ordering" loading="lazy">
+                </figure>
+                <h3 class="project-title">Online Restaurant Ordering</h3>
+                <p class="project-category">PHP · MySQL</p>
+              </a>
+            </li>
+
+            <!-- ---------- Machine Learning ---------- -->
+            <li class="project-item active" data-filter-item data-category="machine learning">
+              <a href="https://github.com/ivyyy0601/MLOps-Pipeline-" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-MLOps-Pipeline.png" alt="YouTube Sentiment Analysis – MLOps Pipeline" loading="lazy">
+                </figure>
+                <h3 class="project-title">YouTube Sentiment · MLOps Pipeline</h3>
+                <p class="project-category">MLflow · DVC · AWS · Docker · Flask</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="machine learning">
+              <a href="https://github.com/ivyyy0601/Book-Recommender" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-Book-Recommender.jpg" alt="Semantic Book Recommender" loading="lazy">
+                </figure>
+                <h3 class="project-title">Semantic Book Recommender</h3>
+                <p class="project-category">LLMs · LangChain · ChromaDB · Gradio</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="machine learning">
+              <a href="https://github.com/ivyyy0601/Prediction-of-Intern-Recruitment-Using-Bayesian-Network" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-bayes.jpg" alt="Bayesian Network" loading="lazy">
+                </figure>
+                <h3 class="project-title">Intern Recruitment · Bayesian Network</h3>
+                <p class="project-category">Variable Elimination · Junction Tree</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="machine learning">
+              <a href="https://github.com/ivyyy0601/Sentiment-Analysis" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-twitter-bert.jpg" alt="Twitter Sentiment" loading="lazy">
+                </figure>
+                <h3 class="project-title">Twitter Sentiment · BERT</h3>
+                <p class="project-category">NLP · fine-tuning</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="machine learning">
+              <a href="https://github.com/ivyyy0601/Character-Relationship-Analysis" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-t5-pagerank.jpg" alt="T5 + PageRank" loading="lazy">
+                </figure>
+                <h3 class="project-title">Long-text Summary &amp; Character Graph</h3>
+                <p class="project-category">T5 · PageRank</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="machine learning">
+              <a href="https://github.com/ivyyy0601/Reinforcement-Learning" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-rl-maze.jpg" alt="Reinforcement Learning Maze" loading="lazy">
+                </figure>
+                <h3 class="project-title">Path Planning · Reinforcement Learning</h3>
+                <p class="project-category">Q-learning · DQN</p>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="quant">
+              <a href="https://youtube.com/@ivyyy0601?si=kjonzxIB0Tf8V" target="_blank" rel="noopener">
+                <figure class="project-img">
+                  <img src="./assets/images/project-montecarlo.jpg" alt="Economic Scenario Generator" loading="lazy">
+                </figure>
+                <h3 class="project-title">Economic Scenario Generator</h3>
+                <p class="project-category">Monte Carlo Simulation</p>
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+    </div>
 
   </main>
 
-  <footer>
-    <div class="wrap">© 2026 Ivy Chen · New York</div>
-  </footer>
+  <script src="./assets/js/script.js"></script>
 
 </body>
 
